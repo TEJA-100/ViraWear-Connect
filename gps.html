@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPS Trackering</title>
+    <link rel="stylesheet" href="gps.css">
+    <link rel="icon" href="images/ViraWear Connect.png" class="logo">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+
+    <!-- 1. HEADER (Full Width, Fixed Top) -->
+    <header>
+        <div class="header-left">
+            <img src="images/ViraWear Connect-png.png" alt="ViraWear Logo" class="logo">
+            <span>ViraWear Connect</span>
+        </div>
+        <div class="header-right">
+            <div class="notification-box">
+                <i class="fa-solid fa-bell"></i>
+                <span class="badge">3</span>
+            </div>
+            <div class="profile-pic">JD</div>
+        </div>
+    </header>
+
+    <!-- 2. LAYOUT CONTAINER (Sidebar + Main) -->
+    <div class="layout-container">
+        
+        <!-- SIDEBAR -->
+        <aside>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#">
+                        <i class="fa-solid fa-house"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="active">
+                        <i class="fa-solid fa-map"></i> GPS Tracking
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <i class="fa-solid fa-video"></i> Livestream
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <i class="fa-solid fa-triangle-exclamation"></i> Alerts
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <i class="fa-solid fa-gear"></i> Settings
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main>
+            <div class="page-title">
+                <h1>GPS Tracking</h1>
+                <p>Real-time location monitoring</p>
+            </div>
+
+            <div class="dashboard-grid">
+                
+                <!-- Left Column: Map -->
+                <div class="card" style="padding: 15px;">
+                    <div class="card-header">Live Map</div>
+                    <div class="map-wrapper">
+                        <!-- Placeholder Map UI -->
+                        <i class="fa-solid fa-location-dot map-pin"></i>
+                        <div class="map-text">Interactive map display</div>
+                        <div class="map-subtext">Tracking 3 devices</div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Devices -->
+                <div class="devices-stack">
+                    
+                    <!-- Device Alpha -->
+                    <div class="device-info-card">
+                        <div class="card-header">
+                            <i class="fa-solid fa-location-arrow"></i> Device Alpha
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Latitude</span>
+                            <span class="info-value">37.7749</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Longitude</span>
+                            <span class="info-value">-122.4194</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Speed</span>
+                            <span class="info-value">45 km/h</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Heading</span>
+                            <span class="info-value">90°</span>
+                        </div>
+                        <div class="status-indicator">
+                            <div class="dot"></div> Moving
+                        </div>
+                    </div>
+
+                    <!-- Device Beta -->
+                    <div class="device-info-card">
+                        <div class="card-header">
+                            <i class="fa-solid fa-location-arrow"></i> Device Beta
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Latitude</span>
+                            <span class="info-value">37.7849</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Longitude</span>
+                            <span class="info-value">-122.4094</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Speed</span>
+                            <span class="info-value">32 km/h</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Heading</span>
+                            <span class="info-value">180°</span>
+                        </div>
+                        <div class="status-indicator">
+                            <div class="dot"></div> Moving
+                        </div>
+                    </div>
+
+                    <!-- Device Gamma -->
+                    <div class="device-info-card">
+                        <div class="card-header">
+                            <i class="fa-solid fa-location-arrow"></i> Device Gamma
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Latitude</span>
+                            <span class="info-value">37.7649</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Longitude</span>
+                            <span class="info-value">-122.4294</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Speed</span>
+                            <span class="info-value">0 km/h</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Heading</span>
+                            <span class="info-value">0°</span>
+                        </div>
+                        <!-- Changed color for stopped status manually -->
+                        <div class="status-indicator">
+                            <span> Stopped</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
