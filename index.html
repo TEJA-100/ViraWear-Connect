@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ViraWear Connect | Login</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #09090B;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: -1;
+    }
+
+    .container {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      background: #18181B;
+      width: 500px;
+      padding: 40px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+
+    .logo {
+      width: 140px;
+      margin-top: 10px;
+      margin-left: -30px;
+    }
+
+    .logo,
+    .title h1 {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .title h1 {
+      margin-left: -30px;
+      font-size: 28px;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      margin-top: -20px;
+      margin-bottom: 25px;
+      font-size: 14px;
+      color: #a8a8a8;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin: 10px 0 5px;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #333;
+      background: #232428;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      margin-bottom: 15px;
+    }
+
+    input:focus {
+      border: 3px solid #777;
+    }
+
+    button {
+      width: 90%;
+      padding: 14px;
+      background: #008ec4;
+      color: #fff;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .error-msg {
+      color: #ff6b6b;
+      font-size: 14px;
+      text-align: left;
+      margin-bottom: 10px;
+      min-height: 18px;
+    }
+
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100%;
+      background: white url("/Untitled\ design\ \(2\).gif") no-repeat center center;
+      background-size: 40%;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+  </style>
+</head>
+
+<body>
+  <video autoplay muted loop class="bg-video">
+    <source src="PixVerse_V5.5_Image_Text_360P_Create_a_realist.mp4" type="video/mp4" />
+  </video>
+
+  <div class="overlay"></div>
+  <div class="loader"></div>
+
+  <div class="container">
+    <div class="card">
+      <div class="title">
+        <img src="ViraWear Connect (1).png" alt="logo" class="logo" />
+        <h1>ViraWear Connect</h1>
+      </div>
+
+      <p class="subtitle">Sign in to access your monitoring dashboard</p>
+
+      <form id="loginForm">
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="your@email.com" required />
+
+        <label for="password">Password</label>
+        <input id="password" type="password" placeholder="••••••••" required />
+
+        <div id="errorMsg" class="error-msg"></div>
+
+        <button type="submit" id="loginBtn">Sign In</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Firebase Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+
+  <script>
+    window.addEventListener("load", function () {
+      const loader = document.querySelector(".loader");
+      setTimeout(() => {
+        loader.style.opacity = "0";
+        setTimeout(() => {
+          loader.style.display = "none";
+        }, 500);
+      }, 2000);
+    });
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCxNbpe2iuvtz1pQUwLeBf-DIn71zhMu84",
+      authDomain: "virawear-aee99.firebaseapp.com",
+      projectId: "virawear-aee99",
+      storageBucket: "virawear-aee99.firebasestorage.app",
+      messagingSenderId: "41356507152",
+      appId: "1:41356507152:web:c9b5cb3510293dff09b295"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    const auth = firebase.auth();
+
+    const form = document.getElementById("loginForm");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const errorMsg = document.getElementById("errorMsg");
+    const loginBtn = document.getElementById("loginBtn");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+
+      errorMsg.textContent = "";
+      loginBtn.disabled = true;
+      loginBtn.textContent = "Signing in...";
+
+      auth.signInWithEmailAndPassword(email, password)
+        .then(() => {
+          window.location.href = "dashboard.html";
+        })
+        .catch((error) => {
+          if (error.code === "auth/user-not-found") {
+            errorMsg.textContent = "No account found with this email.";
+          } else if (error.code === "auth/wrong-password") {
+            errorMsg.textContent = "Incorrect password.";
+          } else {
+            errorMsg.textContent = error.message;
+          }
+        })
+        .finally(() => {
+          loginBtn.disabled = false;
+          loginBtn.textContent = "Sign In";
+        });
+    });
+  </script>
+
+</body>
+</html>
+
